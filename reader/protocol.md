@@ -1,4 +1,4 @@
-# TODO Protocol
+# ToDo Protocol
 
 Create and complete TODO items, with a reward.
 
