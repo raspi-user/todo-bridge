@@ -2,6 +2,9 @@
 
 Create and complete TODO items, with a reward.
 
+- [Query](./query)
+- [Socket](./socket)
+
 ## Goals
 
 * Allow a user to create TODO tasks

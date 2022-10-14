@@ -70,6 +70,7 @@ module.exports = async (state, action) => {
         console.error(`[!] Token in output #${output.i} is too long`)
         continue
       }
+      console.log(`[+] Adding a new ToDo task worth ${output.e.v} sats`)
       await state.create({
         collection: 'todo',
         data: {
@@ -77,7 +78,7 @@ module.exports = async (state, action) => {
           token: action.envelope,
           user: output.h0,
           task: output.b3,
-          sats: output.v
+          sats: output.e.v
         }
       })
     }
