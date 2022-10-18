@@ -7,4 +7,3 @@ This repository should be used as part of the [TODO Example App](https://github.
 # License
 
 The license for the code in this repository is the Open BSV License.
-
