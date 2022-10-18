@@ -1,6 +1,14 @@
+/**
+ * transformer/src/process.js
+ * This file contains the primary business logic for the TODO Token Bridge.
+ */
 const bsv = require('bsv')
 
 const OP_CHECKSIG = 172
+
+// This is the namespace address for the ToDo protocol
+// You can create your own Bitcoin address to use, and customize this protocol
+// for your own needs.
 const TODO_PROTO_ADDR = '1ToDoDtKreEzbHYKFjmoBuduFmSXXUGZG'
 
 module.exports = async (state, action) => {
@@ -23,10 +31,15 @@ module.exports = async (state, action) => {
     for (const input of action.in) {
       let tokenToDelete = input.e.h + Number(input.e.i)
         .toString(16).padStart(8, '0')
-      await state.delete({
+      const operation = await state.delete({
         collection: 'todo',
         find: { _id: tokenToDelete }
       })
+      if (operation.deletedCount > 0) {
+        console.log(
+          `Transaction input #${input.i} completed a task`
+        )
+      }
     }
 
     // Tokens associated with each output are created
@@ -75,7 +88,14 @@ module.exports = async (state, action) => {
         collection: 'todo',
         data: {
           _id: currentOutpoint,
-          token: action.envelope,
+          // The token contains the information needed to spend the output
+          token: {
+            ...action.envelope,
+            lockingScript: new bsv.Transaction(action.envelope.rawTx)
+              .outputs[output.i].script.toHex(),
+            txid: action.tx.h,
+            outputIndex: output.i
+          },
           user: output.h0,
           task: output.b3,
           sats: output.e.v
