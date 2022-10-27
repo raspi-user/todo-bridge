@@ -1,11 +1,11 @@
 {
     "bridgeport": "0.2.0",
-    "id": "1ToDoDtKreEzbHYKFjmoBuduFmSXXUGZG",
+    "id": "1NsL6Jdh6nuU4oQDKr9FHXH2ARAWJPVExv",
     "name": "TODO Token Bridge",
     "description": "Create and complete TODO items, with a reward.",
     "version": "1.0.0",
     "repoToken":"",
-    "testnetRepoToken": "pcO+X1IzSOaAS7KK",
+    "testnetRepoToken": "tVnPhtg/hmADAG6z",
     "reader": {
       "runtime": "nodejs14",
       "directory": "./reader"
